@@ -3,6 +3,26 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+/*
+    mapBtn.click(function() {
+      require.ensure([], function() {
+        var baidumap = require('./baidumap.js')    //baidumap.js放在我们当前目录下
+      })
+    })
+
+require.ensure  这个函数是j一个代码分离的分割线，回调里面的require 是我们想要进行分割出去的资源，require.ensure会把没有使用过的require资源 分成一个webpack打包的单独js文件
+
+ensure的第一个参数[]
+    是指 当前这个 require.ensure所依赖的其他 异步加载的模块。 如果想加载A，require.ensure(['A.js'],function) 即可
+    但是这里需要注意的是，webpack会把参数里面的依赖异步模块和当前的需要分离出去的异步模块给一起打包成同一个js文件，
+    这里可能会出现一个重复打包的问题， 假设A 和 B都是异步的， ensure A 中依赖B，ensure B中 依赖A，那么会生成两个文件，都包含A和B模块。
+ensure的第二个参数function(){}
+    表示当下载js完成后的回调函数，一般是对js的引用
+
+r 是什么？
+    resolve ，依赖于Promise
+*/
+
 const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
 const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manage');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
@@ -19,7 +39,11 @@ const uploadImg = r => require.ensure([], () => r(require('@/page/uploadImg')), 
 const vueEdit = r => require.ensure([], () => r(require('@/page/vueEdit')), 'vueEdit');
 const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'adminSet');
 const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
-const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
+const explain = r => require.ensure(
+    [],
+    () => r(require('@/page/explain')),
+    'explain'
+);
 
 const routes = [
 	{
